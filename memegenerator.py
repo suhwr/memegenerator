@@ -61,12 +61,15 @@ def make_meme(topString, bottomString, filename):
         
         if original.format == 'WEBP':
             frames[0].save("temp.webp", save_all=True, append_images=frames[1:], loop=0, duration=original.info['duration'])
+            print("file save in temp.webp")
         else:
             frames[0].save("temp.gif", save_all=True, append_images=frames[1:], loop=0)
+            print("file save in temp.gif")
     else:
         img = original
         process_frame(img, topString, bottomString)
-        img.save("temp." + original.format.lower())
+        img.save("temp." + )
+        print(f'file save in temp.{original.format.lower()}')
 
 def process_frame(img, topString, bottomString):
     imageSize = img.size
@@ -107,7 +110,7 @@ def process_frame(img, topString, bottomString):
 if __name__ == '__main__':
     args_len = len(sys.argv)
     topString = ''
-    meme = 'standard'
+    meme = 'standard.jpg'
 
     if args_len == 1:
         # No args except the launch of the script
@@ -120,18 +123,17 @@ if __name__ == '__main__':
     elif args_len == 3:
         # Args give meme and one line
         bottomString = get_upper(sys.argv[-1])
-        meme = get_lower(sys.argv[1])
+        meme = sys.argv[1]
 
     elif args_len == 4:
         # Args give meme and two lines
         topString = get_upper(sys.argv[-2])
         bottomString = get_upper(sys.argv[-1])
-        meme = get_lower(sys.argv[1])
+        meme = sys.argv[1]
     else:
         # Too many args
         print('too many args')
-
-    print(meme, topString, bottomString+'"')
+    
     filename = str(meme)
     make_meme(topString, bottomString, filename)
     
