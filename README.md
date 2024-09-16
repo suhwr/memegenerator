@@ -2,71 +2,65 @@
 ## Bonus: Alfred-Workflow
 
 ## Introduction
-This is a Meme-Generator for Python, using PIL (with FreeType). It can put captions at the top and the bottom of images.
+Ini adalah Meme-Generator untuk Python, menggunakan PIL (dengan FreeType). Meme ini dapat memberi keterangan di bagian atas dan bawah gambar.
 
 ## Requirements
-To use the Meme Generator, you have to have Python (duh!) and PIL (Python Image Library) with working FreeType.
+Untuk menggunakan Meme Generator, Anda harus memiliki Python (tentu saja!) dan PIL (Python Image Library versi 9.0.1) dengan FreeType yang berfungsi.
 
-To use the Alfred-Workflow, you have to have Alfred2 with the Powerpack installed.
+Untuk menggunakan Alfred-Workflow, Anda harus memiliki Alfred2 dengan Powerpack terpasang.
 
 ## Installation
 
-Download or fork or whatever this Repository, it has everything you need. It even comes with a few meme templates to get you started.
-
-If you want to use the Alfred2-Workflow, I'd advice you to put the `memegenerator`-Folder into `~/dev/` (because this is where the Workflow will look for the files. If you feel uncomfortable using `~/dev/`, you can just edit the paths in the Workflow according to your needs.
-
-The Workflow also tries to start a Virtual Environment called "venv" before running the Script, because I assume you installed the PIL there and not globally.
-
-Again, the Generator is not that complicated, if you do not want to use a Workflow, you can just change a few lines and you'll be alright.
-
-To install the Alfred-Workflow, you just have to Open it.
+Unduh atau fork atau apa pun Repositori ini, ia memiliki semua yang Anda butuhkan. Ia bahkan dilengkapi dengan beberapa templat meme untuk membantu Anda memulai.
 
 ## Command-Line Usage
 
-The memegenerator.py uses images with the extension `.jpg` in the same folder it is in.
+Memegenerator.py menggunakan gambar dengan ekstensi `.jpg, .png, .webp, .gif` dalam folder yang sama.
 
-So, assuming the script is in using `~/dev/memegenerator/`, all the image files should be there, too.
+Jadi, dengan asumsi skrip tersebut menggunakan `~/dev/memegenerator/`, semua berkas gambar juga harus ada di sana.
 
-For Example: If you wanted to create a Success Kid-Meme, you'd put a file `successkid.jpg` (with the empty template) into `~/dev/memegenerator/`. It's really not that hard.
+Misalnya: Jika Anda ingin membuat Meme Anak Sukses, Anda akan meletakkan file `successkid.jpg` (dengan templat kosong) ke dalam `~/dev/memegenerator/`. Sebenarnya tidak terlalu sulit.
 
-If you want to use the Generator from the Command Line, you only put in `python memegenerator.py successkid "Top Caption" "Bottom Caption"`, hit Enter, and it will generate `temp.png` and save it to the same folder the Generator is located in.
+Jika Anda ingin menggunakan Generator dari Command Line, Anda hanya memasukkan `python memegenerator.py successkid "Top Caption" "Bottom Caption"`, tekan Enter, dan itu akan menghasilkan `temp.<ext>` dan menyimpannya ke direktori ini
 
-The `temp.png` will have the same size as the template you put in. It will be overwritten the next time you use the Generator, so rename or move it, if you want to keep it.
+The `temp.<extension>` will have the same size as the template you put in. It will be overwritten the next time you use the Generator, so rename or move it, if you want to keep it.
+The `temp.<extension>` will have the same size as the template you put in. It will be overwritten the next time you use the Generator, so rename or move it, if you want to keep it.
+
+`temp.<extension>` akan memiliki ukuran yang sama dengan templat yang Anda masukkan. Templat tersebut akan ditimpa saat Anda menggunakan Generator berikutnya, jadi ganti nama atau pindahkan templat tersebut jika Anda ingin menyimpannya.
+
+
+### INSTALL PILLOW VERSION 9.0.1
+```bash
+  pip install pillow==9.0.1
+```
+
+### FILE SUPPORT 
+• png
+• jpg
+• webp (animation support)
+• gif (penambahan baru)
 
 ### Arguments
 
-The Generator takes several arguments and treats them as follows:
-
-#### One Argument
-``` bash
-$ python memegenerator.py "Lorem Ipsum"
-```
-Launching the script with only one argument will fall back and use a template file called `standard.jpg`. This is intended as a shortcut if you primarily create one type of meme. The given Argument will be used as the bottom caption.
+Generator mengambil beberapa argumen dan memperlakukannya sebagai berikut:
 
 #### Two Arguments
 ``` bash
-$ python memegenerator.py memetype "Lorem Ipsum"
+$ python memegenerator.py filename.png "Lorem Ipsum"
 ```
-This is similar to One Argument: The second Argument will be printed as the bottom caption on the meme template of your choosing.
+
 #### Three Arguments
 ``` bash
-$ python memegenerator.py memetype "Lorem Ipsum" "Dolor Sit"
+$ python memegenerator.py filename.gif "Lorem Ipsum" "Dolor Sit"
 ```
-This uses the second Argument as top caption, and the third as bottom caption.
+Ini menggunakan Argumen kedua sebagai keterangan atas, dan yang ketiga sebagai keterangan bawah.
 
-The Memegenerator doesn't support more than three Arguments at the moment.
-
-### Using the Alfred Workflow
-The Workflow takes the same arguments as the script and works the same. As a bonus, it will open the `temp.png` with Preview.app, select everything, copy it to the clipboard and close Preview.app again.
-
-Now you can paste the image into Messages, Tweetbot, Photoshop or any other App that supports this.
-
-Using Applescript to open and close Preview, just to copy it to the Clipboard is a little messy, so if you have a better idea, send a pull request my way or open a ticket.
+Memegenerator tidak mendukung lebih dari tiga Argumen saat ini.
 
 ## API Usage
 
-It is also possible to use memegenerator as an imported library. The memegenerator module has a single top-level method, `make_meme(topString, bottomString, filename)`. The first two arguments specify the text which will appear on the image. The final argument is the full filename to the source image to be used. A file with the name 'temp.png' will be placed into the current directory. If no text is required for the top (or bottom), pass in the empty string.
+Memegenerator juga dapat digunakan sebagai pustaka impor. Modul memegenerator memiliki satu metode tingkat atas, `make_meme(topString, bottomString, filename)`. Dua argumen pertama menentukan teks yang akan muncul pada gambar. Argumen terakhir adalah nama berkas lengkap dari gambar sumber yang akan digunakan. File dengan nama 'temp.<extension>' akan ditempatkan di direktori saat ini. Jika tidak ada teks yang diperlukan untuk bagian atas (atau bawah), masukkan string kosong.
 
 ## Notes
 
-Feel free to use, fork and improve, and send me Pull Requests if you think you really got something great that should be included here.
+Jangan ragu untuk menggunakan, mengembangkan dan meningkatkan, serta kirimkan Pull Request kepada saya jika menurut Anda ada sesuatu yang hebat yang perlu disertakan di sini.
