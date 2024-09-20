@@ -1,13 +1,10 @@
 # Python Meme Generator
-## Bonus: Alfred-Workflow
 
 ## Introduction
 Ini adalah Meme-Generator untuk Python, menggunakan PIL (dengan FreeType). Meme ini dapat memberi keterangan di bagian atas dan bawah gambar.
 
 ## Requirements
-Untuk menggunakan Meme Generator, Anda harus memiliki Python (tentu saja!) dan PIL (Python Image Library versi 9.0.1) dengan FreeType yang berfungsi.
-
-Untuk menggunakan Alfred-Workflow, Anda harus memiliki Alfred2 dengan Powerpack terpasang.
+Untuk menggunakan Meme Generator, Anda harus memiliki Python (tentu saja!) dan PIL (Python Image Library) dengan FreeType yang berfungsi.
 
 ## Installation
 
@@ -29,16 +26,16 @@ The `temp.<extension>` will have the same size as the template you put in. It wi
 `temp.<extension>` akan memiliki ukuran yang sama dengan templat yang Anda masukkan. Templat tersebut akan ditimpa saat Anda menggunakan Generator berikutnya, jadi ganti nama atau pindahkan templat tersebut jika Anda ingin menyimpannya.
 
 
-### INSTALL PILLOW VERSION 9.0.1
+### INSTALL PILLOW 
 ```bash
-  pip install pillow==9.0.1
+  pip install pillow
 ```
 
 ### FILE SUPPORT 
 • png
 • jpg
 • webp (animation support)
-• gif (penambahan baru)
+• gif +
 
 ### Arguments
 
