@@ -1,6 +1,9 @@
 import re
+import os
 from PIL import Image, ImageDraw, ImageFont, ImageSequence
 import sys
+
+dir_path = os.path.dirname(os.path.abspath(__file__))
 
 def remove_emojis(text):
     # Regular expression for matching emojis
@@ -48,6 +51,10 @@ def get_lower(somedata):
         result = cleaned_data.lower()
     return result
 
+def getsize(font, text):
+    left, top, right, bottom = font.getbbox(text)
+    return right - left, bottom - top
+ 
 def make_meme(topString, bottomString, filename):
     # Open the image
     original = Image.open(filename)
@@ -75,15 +82,15 @@ def process_frame(img, topString, bottomString):
     imageSize = img.size
 
     # Find the biggest font size that works
-    fontSize = int(imageSize[1] / 5)
-    font = ImageFont.truetype("Fonts/impact.ttf", fontSize)
-    topTextSize = font.getsize(topString)
-    bottomTextSize = font.getsize(bottomString)
+    fontSize = int(imageSize[1] / 7.5)
+    font = ImageFont.truetype(f"{dir_path}/Fonts/impact.ttf", fontSize)
+    topTextSize = getsize(font, topString)
+    bottomTextSize = getsize(font, bottomString)
     while topTextSize[0] > imageSize[0] - 20 or bottomTextSize[0] > imageSize[0] - 20:
         fontSize -= 1
-        font = ImageFont.truetype("Fonts/impact.ttf", fontSize)
-        topTextSize = font.getsize(topString)
-        bottomTextSize = font.getsize(bottomString)
+        font = ImageFont.truetype(f"{dir_path}/Fonts/impact.ttf", fontSize)
+        topTextSize = getsize(font, topString)
+        bottomTextSize = getsize(font, bottomString)
 
     # Find top centered position for top text
     topTextPositionX = (imageSize[0] / 2) - (topTextSize[0] / 2)
@@ -92,7 +99,8 @@ def process_frame(img, topString, bottomString):
 
     # Find bottom centered position for bottom text
     bottomTextPositionX = (imageSize[0] / 2) - (bottomTextSize[0] / 2)
-    bottomTextPositionY = imageSize[1] - bottomTextSize[1] - 10
+    padding = imageSize[1] * 0.07
+    bottomTextPositionY = imageSize[1] - bottomTextSize[1] - padding
     bottomTextPosition = (bottomTextPositionX, bottomTextPositionY)
 
     draw = ImageDraw.Draw(img)
